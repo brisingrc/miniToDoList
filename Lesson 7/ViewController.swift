@@ -18,6 +18,11 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         userNameLabel.isHidden = true
+        
+        if let userName = UserDefaults.standard.value(forKey: "UserName") {
+            userNameLabel.isHidden = false
+            userNameLabel.text = userName as? String
+        }
     }
     
     func wrongFormatAlert() {
@@ -45,6 +50,7 @@ class ViewController: UIViewController {
         } else {
             userNameLabel.isHidden = false
             self.userNameLabel.text = firstNameTextField.text! + " " + secondNameTextField.text!
+            UserDefaults.standard.set(userNameLabel.text, forKey: "UserName")
         }
         
         firstNameTextField.text = nil
